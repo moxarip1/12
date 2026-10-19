@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">AutoClip Studio</string>
+    <string name="subtitle_tagline">zhouxiaoka/AutoClip • AI Short-Form Video Clipper</string>
+    <string name="tab_projects">Projects</string>
+    <string name="tab_pipeline">Pipeline</string>
+    <string name="tab_collections">Collections</string>
+    <string name="tab_build_updates">APK &amp; Updates</string>
+    <string name="tab_settings">AI Engine</string>
+    <string name="btn_new_project">New Video Task</string>
+    <string name="btn_pick_local_video">Import Local Video (MP4/MOV)</string>
+    <string name="btn_run_ai_clipper">Run AI Highlight Pipeline</string>
+    <string name="btn_create_collection">Auto-Generate Collections</string>
+    <string name="btn_export_clip">Render 9:16 Short + Burn Subtitles</string>
+    <string name="btn_sync_debug_apk">Sync Latest Build to /debug/debug.apk</string>
+    <string name="security_warning_prototype">Security Warning: API keys configured for this prototype are packaged via BuildConfig. Do not share the APK publicly with real keys.</string>
+</resources>

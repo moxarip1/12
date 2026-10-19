@@ -1,0 +1,10 @@
+{
+  "appName": "AutoClip Studio",
+  "upstreamRepository": "https://github.com/zhouxiaoka/AutoClip",
+  "apkFile": "debug/debug.apk",
+  "apkSizeBytes": 18642682,
+  "versionName": "1.5.0-autoclip-gemini-free",
+  "aiEngine": "Google AI Studio Gemini API (gemini-3.5-flash) + Free Local Engine",
+  "autoUpdateOnAssemble": true,
+  "lastSyncedEpochMs": 1792407691974
+}

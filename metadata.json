@@ -1,0 +1,6 @@
+{
+  "name": "AutoClip Studio",
+  "description": "AI-powered video highlight clipper, auto-captioner, and multi-platform short-form video studio based on zhouxiaoka/AutoClip.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
