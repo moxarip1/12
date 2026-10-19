@@ -182,6 +182,20 @@ fun DebugApkAndSyncScreen(
                             Text("Share debug.apk", color = CyberCyanBright)
                         }
                     }
+
+                    Surface(
+                        shape = RoundedCornerShape(10.dp),
+                        color = CyberCyanBright.copy(alpha = 0.1f),
+                        border = BorderStroke(1.dp, CyberCyanBright.copy(alpha = 0.35f)),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "Automatic Hook Active: Any future code change or build automatically overwrites /debug/debug.apk, /debug/build-manifest.json, and /debug/README.md with the latest APK.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = CyberCyanBright,
+                            modifier = Modifier.padding(10.dp)
+                        )
+                    }
                 }
             }
         }

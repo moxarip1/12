@@ -162,6 +162,12 @@ tasks.register("syncDebugApkToRoot") {
       targetDir.mkdirs()
       val targetApk = dstDir.file("debug.apk").asFile
       debugApk.copyTo(targetApk, overwrite = true)
+
+      val bytes = targetApk.length()
+      val mbTenths = ((bytes * 100L) / (1024L * 1024L))
+      val sizeMb = "${mbTenths / 100}.${(mbTenths % 100).toString().padStart(2, '0')} MB"
+      val nowEpoch = System.currentTimeMillis()
+
       val manifestFile = dstDir.file("build-manifest.json").asFile
       manifestFile.writeText(
         """
@@ -169,19 +175,38 @@ tasks.register("syncDebugApkToRoot") {
           "appName": "AutoClip Studio",
           "upstreamRepository": "https://github.com/zhouxiaoka/AutoClip",
           "apkFile": "debug/debug.apk",
-          "apkSizeBytes": ${targetApk.length()},
+          "apkSizeBytes": $bytes,
+          "apkSizeFormatted": "$sizeMb",
           "versionName": "1.5.0-autoclip-gemini-free",
           "aiEngine": "Google AI Studio Gemini API (gemini-3.5-flash) + Free Local Engine",
           "autoUpdateOnAssemble": true,
-          "lastSyncedEpochMs": ${System.currentTimeMillis()}
+          "lastSyncedEpochMs": $nowEpoch
         }
+        """.trimIndent()
+      )
+
+      val readmeFile = dstDir.file("README.md").asFile
+      readmeFile.writeText(
+        """
+        # AutoClip Studio — Continuous `/debug/debug.apk` Release Folder
+
+        This `/debug` directory always holds the latest compiled Android package (`debug.apk`) with all cumulative and future updates automatically synced on every build.
+
+        - **APK File:** `/debug/debug.apk`
+        - **Size:** $sizeMb ($bytes bytes)
+        - **Version:** `1.5.0-autoclip-gemini-free`
+        - **AI Engine:** Google AI Studio Gemini API (`gemini-3.5-flash`, `gemini-3.1-flash-lite-preview`, `gemini-3.1-pro-preview`) + Free Built-In Local Engine
+        - **Last Auto-Synced (Epoch MS):** `$nowEpoch`
+        - **Continuous Update Hook:** Configured in `app/build.gradle.kts` (`syncDebugApkToRoot`) to overwrite `/debug/debug.apk` automatically after every `assembleDebug`, `packageDebug`, or future code update.
         """.trimIndent()
       )
     }
   }
 }
 
-tasks.matching { it.name == "assembleDebug" || it.name == "packageDebug" }.configureEach {
+tasks.matching {
+  it.name == "assembleDebug" || it.name == "packageDebug" || it.name == "assemble" || it.name == "build"
+}.configureEach {
   finalizedBy("syncDebugApkToRoot")
 }
 
